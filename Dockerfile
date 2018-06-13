@@ -1,5 +1,5 @@
 FROM daocloud.io/brave8/maven-jdk8
-ADD app-assembly.jar /tmp/app-assembly.jar
-VOLUME /tmp
-EXPOSE 9000
-ENTRYPOINT ["java","-jar","/tmp/app-assembly.jar"]
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+COPY ./run_jar.sh ./app-assembly.jar ./
+ENTRYPOINT ["./run_jar.sh"]
