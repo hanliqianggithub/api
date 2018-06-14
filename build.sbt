@@ -7,15 +7,13 @@ scalaVersion := "2.12.6"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
-test in assembly := {}
-// Simple and constant jar name
-assemblyJarName in assembly := s"app-assembly.jar"
-// Merge strategy for assembling conflicts
-assemblyMergeStrategy in assembly := {
-  case PathList("application.conf") => MergeStrategy.concat
-  case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
-  case _ => MergeStrategy.first
-}
+//test in assembly := {}
+//assemblyJarName in assembly := s"app-assembly.jar"
+//assemblyMergeStrategy in assembly := {
+//  case PathList("application.conf") => MergeStrategy.concat
+//  case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+//  case _ => MergeStrategy.first
+//}
 libraryDependencies ++= {
   val akkaV = "2.5.3"
   val akkaHttpV = "10.0.9"
