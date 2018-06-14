@@ -1,1 +1,0 @@
-java $* -jar akka-http-microservice-assembly-1.0.0.jar
