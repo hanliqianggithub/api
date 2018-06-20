@@ -1,6 +1,7 @@
 package service
 
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.log4j.{LogManager, Logger}
 import play.api.libs.json.Json
 import utils.{HttpUtil, KafkaUtil}
 
@@ -8,7 +9,9 @@ import utils.{HttpUtil, KafkaUtil}
   * @author hanliqiang wrote on 2018/6/12
   */
 object CheckInService {
-  def sendOrder(param: String): Unit = {
+  val LOGGER: Logger = LogManager.getLogger(getClass)
+
+  def sendCheckInfo(param: String): Unit = {
     val json = Json.parse(param)
     val checkInId = (json \ "CheckInInfo" \\ "CheckInID")
     var content: String = ""
@@ -16,7 +19,8 @@ object CheckInService {
       content = HttpUtil.doGet("CheckIn/" + checkInId.head.as[Int])
       val data = new ProducerRecord[String, String]("topic_checkin", content)
       KafkaUtil.createProducer().send(data)
-      println("topic topic_checkin 发送成功")
+      LOGGER.info("topic topic_checkin 发送成功")
     }
+    LOGGER.info("没有 CheckInID")
   }
 }
