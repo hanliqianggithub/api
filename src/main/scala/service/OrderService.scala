@@ -11,17 +11,18 @@ import utils.{HttpUtil, KafkaUtil}
 object OrderService {
   val LOGGER: Logger = LogManager.getLogger(getClass)
 
-  def sendOrder(param: String): Unit = {
+  def sendOrder(param: String): String = {
     val json = Json.parse(param)
     val orderId = (json \ "Order" \\ "OrderID")
     var content: String = ""
     if (orderId.isEmpty == false) {
       content = HttpUtil.doGet("Order/" + orderId.head.as[Int])
-      val data = new ProducerRecord[String, String]("topic_order", content)
-      KafkaUtil.createProducer().send(data)
-      LOGGER.info("topic topic_order 发送成功")
+//      val data = new ProducerRecord[String, String]("topic_order", content)
+//      KafkaUtil.createProducer().send(data)
+//      LOGGER.info("topic topic_order 发送成功")
+    }else{
+      LOGGER.info("没有 OrderID")
     }
-    LOGGER.info("没有 OrderID")
-
+    content
   }
 }

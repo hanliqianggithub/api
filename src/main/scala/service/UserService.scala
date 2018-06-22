@@ -1,10 +1,8 @@
 package service
 
-import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.log4j.{LogManager, Logger}
-import play.api.libs.json.Json
-import service.WeChatService.getClass
-import utils.{HttpUtil, KafkaUtil}
+import play.api.libs.json._
+import utils.HttpUtil
 
 /**
   * @author hanliqiang wrote on 2018/6/11
@@ -12,16 +10,18 @@ import utils.{HttpUtil, KafkaUtil}
 object UserService {
   val LOGGER: Logger = LogManager.getLogger(getClass)
 
-  def sendUser(param: String): Unit = {
+  def sendUser(param: String): String = {
     val json = Json.parse(param)
+    println(json)
     val openId = (json \ "WxOpenID")
     var content: String = ""
     if (openId.isEmpty == false) {
       content = HttpUtil.doGet("WxUser/" + openId.as[String])
-      val data = new ProducerRecord[String, String]("topic_wxuser", content)
-      KafkaUtil.createProducer().send(data)
+//      val data = new ProducerRecord[String, String]("topic_wxuser", content)
+//      KafkaUtil.createProducer().send(data)
       LOGGER.info("topic  topic_wxuser 发送成功")
     }
     LOGGER.info("没有 WxOpenID")
+    content
   }
 }

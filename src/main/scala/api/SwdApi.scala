@@ -2,7 +2,6 @@ package api
 
 import akka.http.scaladsl.server.Directives.{entity, _}
 import org.apache.log4j.{LogManager, Logger}
-import service.CheckInService.getClass
 import service.WeChatService
 
 /**
@@ -13,6 +12,7 @@ trait SwdApi {
   val swdApi =
     (post & entity(as[String])) { str =>
       LOGGER.info("传过来的数据为："+str)
+      LOGGER.error("aaaaaaaaaaaaaaaa")
       complete {
         WeChatService.getWeChatValue(str).toString
       }

@@ -20,13 +20,14 @@ libraryDependencies ++= {
     "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpV,
     "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpV,
     "com.typesafe.akka" %% "akka-slf4j" % akkaV,
-//    "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
+    "com.aliyun.openservices" % "log-loghub-log4j-appender" % "0.1.0",
+    "com.aliyun.openservices" % "aliyun-openservices" % "1.0.8",
     "com.typesafe.play" %% "play-json" % "2.6.9",
     "com.typesafe.akka" %% "akka-stream-kafka" % "0.20",
     "org.scalatest" %% "scalatest" % scalaTestV % "test",
     "org.apache.httpcomponents" % "httpclient" % "4.5.5",
     "org.apache.kafka" %% "kafka" % "1.0.0"
-//    "net.logstash.logback" %% "logstash-logback-encoder" % "4.11"
+//        "net.logstash.logback" %% "logstash-logback-encoder" % "4.11"
   )
 }
 Revolver.settings
